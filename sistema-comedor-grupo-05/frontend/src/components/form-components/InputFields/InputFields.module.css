@@ -1,0 +1,96 @@
+.label {
+}
+
+.dataContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.optionsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.optionRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fieldLabel {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.optionRowWithQuantity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.quantityInput {
+  width: 60px;
+  max-width: 80px;
+  padding: 4px 6px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.emptyMessage {
+  color: #666;
+  font-style: italic;
+}
+
+.input {
+  width: 100%;
+  padding-right: 60px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.2s ease;
+}
+
+.showHideButton {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent  !important;
+  border: none !important;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #333 !important;
+  padding: 0 4px;
+  line-height: 1;
+  margin: 0;
+  vertical-align: middle;
+
+  outline: 2px solid transparent !important;
+  outline-offset: -2px !important;
+  box-shadow: none !important;
+  transition: none;
+}
+
+.showHideButton:hover,
+.showHideButton:focus,
+.showHideButton:active {
+  transform: translateY(-50%) !important;
+}
+
+.inputReadOnly {
+  cursor: default !important;
+  background-color: transparent !important;
+  border: none !important;
+}

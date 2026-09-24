@@ -1,0 +1,64 @@
+package ar.uba.fi.ingsoft1.product_example.config;
+
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.tags.Tag;
+import org.springdoc.core.customizers.OpenApiCustomizer;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
+import java.util.HashSet;
+
+import static ar.uba.fi.ingsoft1.product_example.config.security.SecurityConfig.PUBLIC_ENDPOINTS;
+import static ar.uba.fi.ingsoft1.product_example.config.security.SecurityConfig.PUBLIC_POST_ENDPOINTS;
+
+@OpenAPIDefinition(
+        info = @Info(title = "Simple Product App Backend")
+)
+@SecurityScheme(
+        name = OpenApiConfiguration.BEARER_AUTH_SCHEME_KEY,
+        type = SecuritySchemeType.HTTP,
+        scheme = "bearer",
+        bearerFormat = "JWT"
+)
+@Component
+public class OpenApiConfiguration {
+
+    public static final String BEARER_AUTH_SCHEME_KEY = "Bearer Authentication";
+
+    @Bean
+    public OpenApiCustomizer customerGlobalHeaderOpenApiCustomizer() {
+        return openApi -> {
+            var tags = new HashSet<String>();
+
+            for (var entry: openApi.getPaths().entrySet()) {
+                var operations = entry.getValue().readOperationsMap();
+                for (var methodEntry : operations.entrySet()) {
+                    var httpMethod = methodEntry.getKey();
+                    var operation = methodEntry.getValue();
+                    tags.addAll(operation.getTags());
+
+                    boolean isPublicPath = Arrays.asList(PUBLIC_ENDPOINTS).contains(entry.getKey());
+                    boolean isWhitelistedPost = httpMethod != null
+                            && httpMethod.equals(io.swagger.v3.oas.models.PathItem.HttpMethod.POST)
+                            && Arrays.asList(PUBLIC_POST_ENDPOINTS).contains(entry.getKey());
+
+                    if (isPublicPath || isWhitelistedPost) {
+                        operation.getResponses().remove("403");
+                    } else {
+                        operation.addSecurityItem(new SecurityRequirement().addList(BEARER_AUTH_SCHEME_KEY));
+                    }
+                }
+            }
+
+            openApi.setTags(tags.stream()
+                    .sorted()
+                    .map(name -> new Tag().name(name))
+                    .toList());
+        };
+    }
+}

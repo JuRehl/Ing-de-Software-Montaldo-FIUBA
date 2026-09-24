@@ -1,0 +1,187 @@
+.promo-carousel-container {
+  width: 100%;
+  background: linear-gradient(135deg, #fff0f2 0%, #fff 100%);
+  border-bottom: 1px solid #f2f3f6;
+  padding: 32px 0;
+  margin-bottom: 0;
+}
+
+.promo-carousel {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+  box-sizing: border-box;
+}
+
+.promo-slider-wrapper {
+  overflow: hidden;
+  width: 100%;
+  padding: 10px 0 20px 0;
+}
+
+.promo-slider {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.6s ease-in-out;
+  align-items: center;
+}
+
+.promo-card {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 600px;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0.5;
+  transform: scale(0.95);
+  transition: all 0.3s ease;
+}
+
+.promo-card::after {
+  content: "%";
+  position: absolute;
+  right: -20px;
+  top: -30px;
+  font-size: 10rem;
+  font-weight: 900;
+  color: #fef2f2;
+  z-index: 0;
+  transform: rotate(15deg);
+}
+
+.promo-card.active {
+  opacity: 1;
+  transform: scale(1);
+  border-color: #da0f33;
+  box-shadow: 0 16px 40px rgba(218, 15, 51, 0.15);
+}
+
+.promo-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.promo-card h3 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #bf0c2b;
+}
+
+.promo-description {
+  font-size: 1.1rem;
+  color: #4b5563;
+  max-width: 80%;
+}
+
+.promo-type {
+  display: inline-block;
+  background-color: #bf0c2b;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.promo-details-container {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.promo-days {
+  margin-top: auto;
+  padding-top: 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #9ca3af;
+  border-top: 1px solid #f3f4f6;
+}
+
+.promo-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid #e5e7eb;
+  color: #1f2937;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.promo-arrow:hover {
+  background: #bf0c2b;
+  color: white;
+  border-color: #bf0c2b;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.promo-arrow.left {
+  left: 0px;
+}
+
+.promo-arrow.right {
+  right: 0px;
+}
+
+.promo-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: -10px;
+  padding-bottom: 10px;
+}
+
+.dot {
+  width: 32px;
+  height: 4px;
+  border-radius: 2px;
+  background: #e5e7eb;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.dot.active {
+  background: #bf0c2b;
+}
+
+@media (max-width: 768px) {
+  .promo-carousel {
+    padding: 0 16px;
+  }
+  .promo-arrow {
+    display: none;
+  }
+  .promo-card {
+    padding: 24px;
+  }
+  .promo-card h3 {
+    font-size: 1.4rem;
+  }
+}
